@@ -13,6 +13,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "playwright": "^1.51.1",
     "puppeteer": "^24.6.0"
   }
 }

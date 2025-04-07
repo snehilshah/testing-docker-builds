@@ -1,14 +1,17 @@
-import puppeteer from "puppeteer";
-
+import { chromium } from "playwright";
+const fs = require('fs').promises;
 async function run() {
-  const browser = await puppeteer.launch({
+  const browser = await chromium.launch({
     headless: true,
-    defaultViewport: null,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   await page.goto("https://www.google.com");
   await page.screenshot({ path: "example.png" });
+
+  const content = await page.content();
+  await fs.writeFile('page-content.html', content);
+  
   await browser.close();
 }
 run();
